@@ -1,27 +1,32 @@
 'use strict';
 
 var React = require('react/addons');
-var ReactTransitionGroup = React.addons.TransitionGroup;
-
 // Export React so the devtools can find it
-(window !== window.top ? window.top : window).React = React;
+window.top.React = React;
 
-// CSS
-require('../../styles/normalize.css');
-require('../../styles/main.css');
+var Router = require('react-router');
+var {Link, RouteHandler} = Router;
 
-var imageURL = require('../../images/yeoman.png');
+var ReactBootstrap = require('react-bootstrap');
+
+var ReactRouterBootstrap = require('react-router-bootstrap'),
+    NavItemLink = ReactRouterBootstrap.NavItemLink,
+    ButtonLink = ReactRouterBootstrap.ButtonLink;
 
 var WorkshopReactWebpackApp = React.createClass({
-  render: function() {
-    return (
-      <div className='main'>
-        <ReactTransitionGroup transitionName="fade">
-          <img src={imageURL} />
-        </ReactTransitionGroup>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div>
+                <ReactBootstrap.Navbar>
+                    <ReactBootstrap.Nav bsStyle="pills">
+                        <NavItemLink to="/">Home</NavItemLink>
+                    </ReactBootstrap.Nav>
+                </ReactBootstrap.Navbar>
+
+                <RouteHandler />
+            </div>
+        );
+    }
 });
 
 module.exports = WorkshopReactWebpackApp;

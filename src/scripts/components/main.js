@@ -1,16 +1,26 @@
-var WorkshopReactWebpackApp = require('./WorkshopReactWebpackApp');
+// CSS
+//require('../../styles/normalize.css');
+require('../../styles/main.css');
+require('bootstrap/dist/css/bootstrap.css');
+require('bootstrap/dist/css/bootstrap-theme.css');
+
 var React = require('react');
 var Router = require('react-router');
-var Route = Router.Route;
+var {DefaultRoute, Route} = Router;
 
-var content = document.getElementById('content');
+var WorkshopReactWebpackApp = require('./WorkshopReactWebpackApp');
+var View = require('./View');
+//var Edit = require('./Edit');
 
-var Routes = (
-  <Route handler={WorkshopReactWebpackApp}>
-    <Route name="/" handler={WorkshopReactWebpackApp}/>
-  </Route>
+var routes = (
+    <Route handler={WorkshopReactWebpackApp}>
+        <Route name="/" handler={View}>
+        </Route>
+        {/*<Route name="edit" path="/edit/:articleId" handler={Edit}>
+        </Route>*/}
+    </Route>
 );
 
-Router.run(Routes, function (Handler) {
-  React.render(<Handler/>, content);
+Router.run(routes, function(Handler) {
+    React.render(<Handler/>, document.body);
 });
